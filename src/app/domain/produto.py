@@ -1,34 +1,36 @@
-from dataclasses import dataclass, field
-from typing import Dict, Any
+from dataclasses import dataclass
+from typing import Dict, Optional
 
 
 @dataclass
 class Produto:
     sku: int
     titulo: str
-    preco: float
-    preco_pix: float
-    valor_parcela: float
-    numero_parcela: int
-    informacoes_tecnicas: Dict[str, Any] = field(default_factory=dict)
+    preco: Optional[int]
+    preco_pix: Optional[int]
+    valor_parcela: Optional[int]
+    numero_parcela: Optional[int]
+    informacoes_tecnicas: Dict[str, str]
+    disponivel: bool
 
     def __init__(
         self,
         sku: int,
         titulo: str,
-        preco: float,
-        # preco_pix: float,
-        # valor_parcela: float,
-        # numero_parcela: int,
-        # informacoes_tecnicas: Dict[str, Any] = field(default_factory=dict),
+        preco: Optional[int],
+        preco_pix: Optional[int],
+        valor_parcela: Optional[int],
+        numero_parcela: Optional[int],
+        informacoes_tecnicas: Dict[str, str],
     ):
         self.sku = sku
         self.titulo = titulo
         self.preco = preco
-        # self.preco_pix = preco_pix
-        # self.valor_parcela = valor_parcela
-        # self.numero_parcela = numero_parcela
-        # self.informacoes_tecnicas = informacoes_tecnicas
+        self.preco_pix = preco_pix
+        self.valor_parcela = valor_parcela
+        self.numero_parcela = numero_parcela
+        self.informacoes_tecnicas = informacoes_tecnicas
+        self.disponivel = self.preco is not None
 
     def __repr__(self):
         return f"""Produto(sku={self.sku!r},
