@@ -1,7 +1,7 @@
 # flake8: noqa: E501
 
 from pathlib import Path
-from app.scrapping.product_parser import ProdutoParser
+from app.scrapping.parsers.product_parser import ProdutoParser
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -14,7 +14,7 @@ def test_parser_produto_1():
     html = ler_html("ventilador_item1.html")
     parser = ProdutoParser(html)
 
-    produto = parser.parse_produto()
+    produto = parser.parse()
 
     assert produto.sku == 920183746512509
     assert produto.titulo == "Ventilador de Parede Oscilante 60cm 200W Light Maeto - Preto"
@@ -44,7 +44,7 @@ def test_parser_produto_2_desconto():
     html = ler_html("ventilador_item2_desconto.html")
     parser = ProdutoParser(html)
 
-    produto = parser.parse_produto()
+    produto = parser.parse()
 
     assert produto.disponivel is True
     assert produto.sku == 920183746512503
@@ -73,7 +73,7 @@ def test_parser_produto_3_indisponivel():
     html = ler_html("ventilador_item3_indisponivel.html")
     parser = ProdutoParser(html)
 
-    produto = parser.parse_produto()
+    produto = parser.parse()
 
     assert produto.disponivel is False
     assert produto.sku == 337898940756104

@@ -20,7 +20,7 @@ class ProdutoParser:
 
         self._doc = html.fromstring(html_text)
 
-    def parse_produto(self) -> Produto:
+    def parse(self) -> Produto:
         """Analisa o HTML de um produto e extrai as informações relevantes para
         criar um objeto de Produto.
 
@@ -158,7 +158,10 @@ class ProdutoParser:
             produto.
         """
         informacoes_tecnicas = {}
-        rows = self._soup_base.select("#product-description-table-attributes tr")
+        rows = self._soup_base.select(
+            """#product-description-table-attributes
+                                      tr"""
+        )
 
         for row in rows:
             cols = row.select("td")
