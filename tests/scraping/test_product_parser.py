@@ -1,7 +1,7 @@
 # flake8: noqa: E501
 
 from pathlib import Path
-from app.scraping.parsers.product_parser import ProdutoParser
+from app.scraping.parsers.produto_parser import ProdutoParser
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 

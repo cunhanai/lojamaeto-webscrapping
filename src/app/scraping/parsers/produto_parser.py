@@ -34,17 +34,17 @@ class ProdutoParser:
             do HTML.
         """
         return Produto(
-            sku=self._extract_sku(),
-            titulo=self._extract_titulo(),
-            preco=self._extract_preco(),
-            preco_pix=self._extract_preco_pix(),
-            valor_parcela=self._extract_valor_parcela(),
-            numero_parcela=self._extract_numero_parcela(),
-            informacoes_tecnicas=self._extract_informacoes_tecnicas(),
-            disponivel=self._extract_preco() is not None,
+            sku=self._extrair_sku(),
+            titulo=self._extrair_titulo(),
+            preco=self._extrair_preco(),
+            preco_pix=self._extrair_preco_pix(),
+            valor_parcela=self._extrair_valor_parcela(),
+            numero_parcela=self._extrair_numero_parcela(),
+            informacoes_tecnicas=self._extrair_informacoes_tecnicas(),
+            disponivel=self._extrair_preco() is not None,
         )
 
-    def _extract_sku(self) -> str:
+    def _extrair_sku(self) -> str:
         """Extrai o SKU do produto a partir do HTML.
 
         Args:
@@ -60,7 +60,7 @@ class ProdutoParser:
 
         raise ValueError("SKU não encontrado")
 
-    def _extract_titulo(self) -> str:
+    def _extrair_titulo(self) -> str:
         """Extrai o título do produto a partir do HTML.
 
         Args:
@@ -76,7 +76,7 @@ class ProdutoParser:
 
         raise ValueError("Título não encontrado")
 
-    def _extract_preco(self) -> Optional[int]:
+    def _extrair_preco(self) -> Optional[int]:
         """Extrai o preço do produto a partir do HTML.
 
         Args:
@@ -97,7 +97,7 @@ class ProdutoParser:
 
         return None
 
-    def _extract_preco_pix(self) -> Optional[int]:
+    def _extrair_preco_pix(self) -> Optional[int]:
         """Extrai o preço do produto para pagamento via Pix a partir do HTML.
 
         Args:
@@ -118,7 +118,7 @@ class ProdutoParser:
 
         return None
 
-    def _extract_valor_parcela(self) -> Optional[int]:
+    def _extrair_valor_parcela(self) -> Optional[int]:
         """Extrai o valor da parcela do produto a partir do HTML.
 
         Args:
@@ -134,7 +134,7 @@ class ProdutoParser:
 
         return None
 
-    def _extract_numero_parcela(self) -> Optional[int]:
+    def _extrair_numero_parcela(self) -> Optional[int]:
         """Extrai o número de parcelas do produto a partir do HTML.
 
         Args:
@@ -150,7 +150,7 @@ class ProdutoParser:
 
         return None
 
-    def _extract_informacoes_tecnicas(self) -> List[InformacaoTecnica]:
+    def _extrair_informacoes_tecnicas(self) -> List[InformacaoTecnica]:
         """Extrai as informações técnicas do produto a partir do HTML.
 
         Args:

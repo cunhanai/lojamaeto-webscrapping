@@ -1,6 +1,5 @@
 from sqlalchemy import ForeignKey, UniqueConstraint, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from app.persistence.models.produto_orm import ProdutoORM
 from app.persistence.database import Base
 
 
@@ -8,7 +7,7 @@ class InformacaoTecnicaORM(Base):
     __tablename__ = "produto_informacao_tecnica"
     __table_args__ = (
         UniqueConstraint(
-            "product_sku",
+            "produto_sku",
             "nome",
             name="uq_produto_informacao_tecnica_nome",
         ),

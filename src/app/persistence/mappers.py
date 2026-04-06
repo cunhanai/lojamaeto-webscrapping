@@ -4,25 +4,24 @@ from app.persistence.models.produto_orm import ProdutoORM
 
 
 def domain_to_orm(produto: Produto) -> tuple[dict, list[dict]]:
-    product_data = {
+    dados_produto = {
         "sku": produto.sku,
-        "title": produto.titulo,
-        "price_cents": produto.preco,
-        "pix_price_cents": produto.preco_pix,
-        "installment_value_cents": produto.valor_parcela,
-        "installment_count": produto.numero_parcela,
-        "source_url": None,
+        "titulo": produto.titulo,
+        "preco": produto.preco,
+        "preco_pix": produto.preco_pix,
+        "valor_parcela": produto.valor_parcela,
+        "numero_parcela": produto.numero_parcela,
     }
 
-    specs_data = [
+    dados_info_tecnica = [
         {
-            "product_sku": produto.sku,
-            "spec_key": info.nome.strip().lower(),
-            "spec_value": info.valor.strip(),
+            "produto_sku": produto.sku,
+            "nome": info.nome.strip().lower(),
+            "valor": info.valor.strip(),
         }
         for info in produto.informacoes_tecnicas
     ]
-    return product_data, specs_data
+    return dados_produto, dados_info_tecnica
 
 
 def orm_to_domain(produto_orm: ProdutoORM) -> Produto:
