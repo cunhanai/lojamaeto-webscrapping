@@ -111,7 +111,7 @@ pytest -q
 scraper run --help
 ```
 
-- Pesquisa com inicializacao automatica do banco:
+- Pesquisa com inicialização automática do banco:
 
 ```powershell
 scraper run -q "ventilador"
@@ -123,7 +123,7 @@ scraper run -q "ventilador"
 scraper run -q "ventilador" --no-init-db
 ```
 
-## Observacoes
+## Observações
 
 - O projeto faz upsert: se o SKU já existir, os dados do produto e das informacoes tecnicas são atualizados.
 
