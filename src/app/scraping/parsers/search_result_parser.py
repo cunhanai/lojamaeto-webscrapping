@@ -1,5 +1,5 @@
-from lxml.etree import _Element
 from lxml import html
+from lxml.etree import _Element
 
 
 class SearchResultParser:

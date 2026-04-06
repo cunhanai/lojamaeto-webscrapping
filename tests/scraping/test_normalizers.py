@@ -1,6 +1,6 @@
 # flake8: noqa: E501
 
-import app.scrapping.normalizers as norm
+import app.scraping.normalizers as norm
 
 
 def test_normalizar_whitespaces_titulo_1():
@@ -40,10 +40,4 @@ def test_normalizar_int_preco_2():
 def test_normalizar_int_parcela():
     texto = "10x"
     resultado = norm.normalizar_int(texto)
-    assert resultado == 10
-
-
-def test_converter_int():
-    texto = "10"
-    resultado = norm.converter_int(texto)
     assert resultado == 10

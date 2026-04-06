@@ -25,15 +25,3 @@ def normalizar_int(texto: str) -> int:
         int: O valor normalizado como um inteiro.
     """
     return int(re.sub(r"[^\d]", "", texto))
-
-
-def converter_int(texto: str) -> int:
-    """Converte textos que representam valores inteiros em números inteiros.
-
-    Args:
-        texto (str): Valor no formato '10', '20', etc.
-
-    Returns:
-        int: O valor normalizado como um inteiro.
-    """
-    return int(texto)

@@ -1,10 +1,12 @@
-from typing import Dict, Optional
+from typing import List, Optional
 
 from bs4 import BeautifulSoup
-from app.domain.produto import Produto
 from lxml import html
 from lxml.etree import _Element
-import app.scrapping.normalizers as norm
+
+from app.domain.info_tecnica import InformacaoTecnica
+import app.scraping.normalizers as norm
+from app.domain.produto import Produto
 
 
 class ProdutoParser:
@@ -39,21 +41,22 @@ class ProdutoParser:
             valor_parcela=self._extract_valor_parcela(),
             numero_parcela=self._extract_numero_parcela(),
             informacoes_tecnicas=self._extract_informacoes_tecnicas(),
+            disponivel=self._extract_preco() is not None,
         )
 
-    def _extract_sku(self) -> int:
+    def _extract_sku(self) -> str:
         """Extrai o SKU do produto a partir do HTML.
 
         Args:
             html (str): O HTML do produto.
 
         Returns:
-            int: O SKU do produto.
+            str: O SKU do produto.
         """
         sku = self._soup_detalhes.select_one(".sku-active")
 
         if sku:
-            return norm.converter_int(sku.text)
+            return norm.normalizar_whitespaces(sku.text)
 
         raise ValueError("SKU não encontrado")
 
@@ -147,17 +150,17 @@ class ProdutoParser:
 
         return None
 
-    def _extract_informacoes_tecnicas(self) -> Dict[str, str]:
+    def _extract_informacoes_tecnicas(self) -> List[InformacaoTecnica]:
         """Extrai as informações técnicas do produto a partir do HTML.
 
         Args:
             html (str): O HTML do produto.
 
         Returns:
-            Dict[str, str]: Um dicionário contendo as informações técnicas do
-            produto.
+            List[InformacaoTecnica]: Uma lista de objetos contendo as
+            informações técnicas do produto.
         """
-        informacoes_tecnicas = {}
+        informacoes_tecnicas = []
         rows = self._soup_base.select(
             """#product-description-table-attributes
                                       tr"""
@@ -166,8 +169,11 @@ class ProdutoParser:
         for row in rows:
             cols = row.select("td")
 
-            chave = norm.normalizar_whitespaces(cols[0].text)
-            valor = norm.normalizar_whitespaces(cols[1].text)
-            informacoes_tecnicas[chave] = valor
+            info = InformacaoTecnica(
+                nome=norm.normalizar_whitespaces(cols[0].text).lower(),
+                valor=norm.normalizar_whitespaces(cols[1].text),
+            )
+
+            informacoes_tecnicas.append(info)
 
         return informacoes_tecnicas
